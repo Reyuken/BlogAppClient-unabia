@@ -108,11 +108,11 @@ async function handleSubmit(e) {
     align-items: center;
 
     background: radial-gradient(circle at top,
-            #0b0b0f,
-            #111827 60%,
-            #1f2937 140%);
+            #fffaf5,
+            #fdf2e9 60%,
+            #f5e6da 140%);
 
-    color: #ffffff;
+    color: #6d4c41;
     padding: 2rem 1rem;
 }
 
@@ -120,7 +120,7 @@ async function handleSubmit(e) {
 .title {
     font-size: 2.2rem;
     font-weight: 800;
-    color: #60a5fa;
+    color: #b08968;
     margin-bottom: 2rem;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -128,40 +128,40 @@ async function handleSubmit(e) {
 
 /* CARD */
 .login-card {
-    background: rgba(17, 24, 39, 0.85);
-    backdrop-filter: blur(12px);
+    background: rgba(255, 250, 245, 0.9);
+    backdrop-filter: blur(10px);
 
-    border: 1px solid rgba(96, 165, 250, 0.25);
-    border-radius: 16px;
+    border: 1px solid rgba(176, 137, 104, 0.25);
+    border-radius: 18px;
 
     padding: 2rem;
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 25px rgba(244, 162, 97, 0.12);
 }
 
 /* LABELS */
 .form-label {
-    color: #cbd5e1;
+    color: #7b5e57;
     font-size: 0.9rem;
 }
 
 /* INPUTS */
 .custom-input {
-    background: rgba(15, 23, 42, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #fff;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(176, 137, 104, 0.25);
+    color: #6d4c41;
 }
 
 .custom-input:focus {
-    border-color: #60a5fa;
-    box-shadow: 0 0 0 0.2rem rgba(96, 165, 250, 0.2);
+    border-color: #f4a261;
+    box-shadow: 0 0 0 0.2rem rgba(244, 162, 97, 0.25);
 }
 
 /* BUTTON */
 .btn-primary {
-    background: #60a5fa;
-    border: none;
-    color: #0b0b0f;
+    background: rgba(244, 162, 97, 0.25);
+    border: 1px solid rgba(176, 137, 104, 0.3);
+    color: #6d4c41;
 
     padding: 0.8rem;
     border-radius: 999px;
@@ -171,19 +171,21 @@ async function handleSubmit(e) {
 }
 
 .btn-primary:hover {
-    background: #3b82f6;
+    background: rgba(244, 162, 97, 0.35);
     transform: translateY(-2px);
 }
 
+/* DISABLED BUTTON */
 .btn-disabled {
-    background: rgba(255, 255, 255, 0.08);
-    color: #64748b;
+    background: rgba(255, 250, 245, 0.8);
+    color: #bfa6a0;
     padding: 0.8rem;
     border-radius: 999px;
+    border: 1px solid rgba(176, 137, 104, 0.15);
 }
 
 /* FOOTER */
 .footer-text a {
-    color: #60a5fa;
+    color: #b08968;
 }
 </style>
