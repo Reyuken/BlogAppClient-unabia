@@ -15,7 +15,7 @@
 		localStorage.clear();
 
 		getUserDetails(null);
-		router.push({name: 'Login'})
+		router.push({name: 'Home'})
 		
 	})
 
