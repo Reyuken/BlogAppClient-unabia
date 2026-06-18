@@ -1,12 +1,10 @@
 <script>
 import { useGlobalStore } from '../stores/global.js'
 import BlogPostsCatalogPage from './BlogPostsCatalogPage.vue'
-// import AdminBlogPostsPage from './AdminBlogPostsPage.vue'
 
 export default {
   components: {
     BlogPostsCatalogPage,
-    // AdminBlogPostsPage
   },
   setup() {
     const { user } = useGlobalStore()
@@ -23,9 +21,7 @@ export default {
 
     <div class="page-container">
 
-      <BlogPostsCatalogPage v-if="!user.isAdmin" />
-
-      <!-- <AdminBlogPostsPage v-else /> -->
+      <BlogPostsCatalogPage />
 
     </div>
 
