@@ -8,7 +8,7 @@ export default {
   data() {
     return {
       bannerProps: {
-        title: "BlogSphere",
+        title: "Vanilla Blog",
         tagline: "Share ideas. Write stories. Build your digital voice.",
         destination: "blogposts",
         buttonLabel: "Explore Blog Posts"
