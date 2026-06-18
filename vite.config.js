@@ -25,6 +25,10 @@ export default defineConfig({
         target: 'http://localhost:4000',
         changeOrigin: true,
       },
+      '/comments': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+      },
     },
   },
 })
