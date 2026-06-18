@@ -22,8 +22,8 @@ export const useGlobalStore = defineStore('global', () => {
         try {
             const { data } = await api.get('/users/details')
 
-            user.email = data.user.email
-            user.isAdmin = data.user.isAdmin || false
+            user.email = data.email
+            user.isAdmin = data.isAdmin || false
 
         } catch (err) {
             console.error('Failed to fetch user details:', err)
