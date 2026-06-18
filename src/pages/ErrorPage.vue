@@ -8,11 +8,11 @@ export default {
     data() {
         return {
             bannerProps: {
-                title: "404 - Scene Not Found",
+                title: "404 - Post Not Found",
                 logo: "/favicon/android-chrome-512x512.png",
-                tagline: "This scene was cut, moved, or never existed in this timeline.",
+                tagline: "This blog post was deleted, moved, or never published in this collection.",
                 destination: { name: "Home" },
-                buttonLabel: "Return Home"
+                buttonLabel: "Back to Home"
             }
         }
     },
@@ -36,7 +36,7 @@ export default {
             <BannerComponent :bannerProps="bannerProps" />
 
             <div class="hint">
-                Looks like you’ve hit a broken reel 🎬
+                Looks like this post melted away 🍦📝
             </div>
 
             <button class="back-btn" @click="goBack">
@@ -57,22 +57,22 @@ export default {
     justify-content: center;
 
     background: radial-gradient(circle at top,
-            #0b0b0f,
-            #111827 60%,
-            #1f2937 140%);
+            #fffaf5,
+            #fdf2e9 60%,
+            #f5e6da 140%);
 
-    color: #e2e8f0;
+    color: #6d4c41;
     overflow: hidden;
 }
 
 .glow-bg {
     position: absolute;
-    width: 500px;
-    height: 500px;
-    background: rgba(96, 165, 250, 0.15);
-    filter: blur(120px);
-    top: -120px;
-    left: -120px;
+    width: 520px;
+    height: 520px;
+    background: rgba(244, 162, 97, 0.18);
+    filter: blur(140px);
+    top: -140px;
+    left: -140px;
     border-radius: 50%;
     animation: float 6s ease-in-out infinite;
 }
@@ -100,24 +100,26 @@ export default {
 .hint {
     margin-top: 1.5rem;
     font-size: 0.95rem;
-    color: #94a3b8;
+    color: #7b5e57;
 }
 
 .back-btn {
     margin-top: 1.5rem;
-    padding: 0.6rem 1.2rem;
+    padding: 0.65rem 1.4rem;
     border-radius: 999px;
-    border: none;
-    background: #3b82f6;
-    color: white;
+    border: 1px solid rgba(176, 137, 104, 0.35);
+    background: rgba(244, 162, 97, 0.18);
+    color: #6d4c41;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: 0.25s ease;
+    backdrop-filter: blur(8px);
 }
 
 .back-btn:hover {
-    background: #2563eb;
-    transform: translateY(-1px);
+    background: rgba(244, 162, 97, 0.28);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(244, 162, 97, 0.15);
 }
 
 :deep(button) {
@@ -125,6 +127,6 @@ export default {
 }
 
 :deep(img) {
-    filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.3));
+    filter: drop-shadow(0 0 10px rgba(244, 162, 97, 0.25));
 }
 </style>
