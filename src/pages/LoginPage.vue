@@ -15,7 +15,7 @@ const isEnabled = ref(false);
 
 onBeforeMount(() => {
     if (store.user.token) {
-        router.push({ path: '/movies' });
+        router.push({ path: '/posts' });
     }
 });
 
@@ -42,7 +42,7 @@ async function handleSubmit(e) {
         email.value = "";
         password.value = "";
 
-        router.push({ path: '/movies' });
+        router.push({ path: '/posts' });
 
     } catch (err) {
         const message =
