@@ -10,7 +10,7 @@ export default {
       bannerProps: {
         title: "Vanilla Blog",
         tagline: "Share ideas. Write stories. Build your digital voice.",
-        destination: "blogposts",
+        destination: "posts",
         buttonLabel: "Explore Blog Posts"
       }
     }
