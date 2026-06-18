@@ -16,6 +16,15 @@ const comments = ref([])
 const commentInput = ref('')
 const loadingComments = ref(false)
 
+import EditCommentComponent from '@/components/EditCommentComponent.vue'
+
+const editCommentRef = ref(null)
+
+function onCommentUpdated() {
+  loadComments(post.value._id)
+}
+
+
 function openViewModal(selectedPost) {
   if (!store.user.token) {
     notyf.error('Please login to view post details')
@@ -25,7 +34,7 @@ function openViewModal(selectedPost) {
 
   post.value = selectedPost
   isOpen.value = true
-    console.log(post);
+
   loadComments(selectedPost._id)
 }
 
@@ -34,14 +43,17 @@ function closeModal() {
   post.value = null
   comments.value = []
   commentInput.value = ''
+  editCommentRef.value?.cancelEdit()
 }
 
 async function loadComments(postId) {
   loadingComments.value = true
-
+  // c.user === store.user.id"
+  console.log(store.user.id)
   try {
     const res = await api.get(`/comments/${postId}/`)
     comments.value = res.data.comments
+    console.log(comments);
   } catch (err) {
     console.error(err)
     notyf.error('Failed to load comments')
@@ -111,14 +123,21 @@ defineExpose({
 
           <div v-else>
             <div v-for="c in comments" :key="c._id" class="comment">
-              {{ c.comment }}
+              <span class="comment-author">👤 {{ c.user.userName }}</span>
+              <div class="comment-content">
+                <p class="comment-text">{{ c.comment }}</p>
+
+                <button v-if="c.user._id === store.user.id" class="edit-btn" @click="editCommentRef.startEdit(c)">
+                  Edit
+                </button>
+              </div>
             </div>
           </div>
 
         </div>
 
       </div>
-
+      <EditCommentComponent ref="editCommentRef" :postId="post?._id" @commentUpdated="onCommentUpdated" />
       <button class="close-btn" @click="closeModal">
         Close
       </button>
@@ -141,8 +160,8 @@ defineExpose({
 }
 
 .modal-box {
-  width: 75vw;
-  max-height: 85vh;
+  width: 50vw;
+  max-height: 90vh;
   overflow: hidden;
 
   background: rgba(255, 250, 245, 0.95);
@@ -237,7 +256,7 @@ defineExpose({
 .comments-scroll {
   flex: 1;
   overflow-y: auto;
-  max-height: 180px;
+  max-height: 25vh;
   padding-right: 5px;
 }
 
@@ -250,6 +269,11 @@ defineExpose({
   color: #6d4c41;
   font-size: 0.85rem;
   transition: 0.2s ease;
+}
+
+.comment-content{
+  display: flex;
+  justify-content: space-between;
 }
 
 .comment:hover {
@@ -279,5 +303,34 @@ defineExpose({
 .close-btn:hover {
   background: rgba(239, 162, 97, 0.35);
   transform: translateY(-2px);
+}
+
+.edit-btn {
+  background: rgba(244, 162, 97, 0.2);
+  border: 1px solid rgba(176, 137, 104, 0.25);
+  color: #6d4c41;
+
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  backdrop-filter: blur(6px);
+}
+
+.edit-btn:hover {
+  background: rgba(244, 162, 97, 0.35);
+  border-color: rgba(244, 162, 97, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(244, 162, 97, 0.15);
+}
+
+.edit-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 </style>
