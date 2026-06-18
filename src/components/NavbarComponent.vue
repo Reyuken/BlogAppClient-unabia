@@ -11,7 +11,7 @@ const { user } = storeToRefs(store)
 		<div class="container">
 
 			<router-link :to="{ path: '/' }" class="navbar-brand fw-bold brand-text d-flex align-items-center gap-2">
-				BlogSphere
+				Vanilla Blog
 			</router-link>
 
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
