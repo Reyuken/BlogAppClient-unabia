@@ -8,10 +8,10 @@ export default {
   data() {
     return {
       bannerProps: {
-        title: "MovieVault",
-        tagline: "Discover films. Track your watchlist. Build your own cinematic universe.",
-        destination: "movies",
-        buttonLabel: "Explore Movies"
+        title: "BlogSphere",
+        tagline: "Share ideas. Write stories. Build your digital voice.",
+        destination: "blogposts",
+        buttonLabel: "Explore Blog Posts"
       }
     }
   }
@@ -28,12 +28,12 @@ export default {
 
       <div class="hero-content">
 
-        <div class="badge">🎬 Movie Library System</div>
+        <div class="badge">📝 Blog Posting System</div>
 
         <BannerComponent :bannerProps="bannerProps" />
 
         <p class="subtext">
-          Browse movies, manage your collection, and keep track of everything you watch.
+          Read posts, share your thoughts, and publish your own blog entries in a clean and simple platform.
         </p>
 
       </div>
@@ -47,10 +47,10 @@ export default {
 .home-wrapper {
   min-height: 100vh;
   background: radial-gradient(circle at top,
-      #0b0b0f,
-      #111827 55%,
-      #1f2937 120%);
-  color: #e2e8f0;
+      #fffaf5,
+      #fdf2e9 55%,
+      #f5e6da 120%);
+  color: #6d4c41;
   overflow-x: hidden;
 }
 
@@ -66,23 +66,23 @@ export default {
 
 .glow {
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   border-radius: 50%;
-  filter: blur(120px);
+  filter: blur(140px);
   opacity: 0.25;
 }
 
 .glow-1 {
-  background: #60a5fa;
-  top: -100px;
-  left: -100px;
+  background: #f4a261;
+  top: -120px;
+  left: -120px;
 }
 
 .glow-2 {
-  background: #ef4444;
-  bottom: -120px;
-  right: -120px;
+  background: #e9c46a;
+  bottom: -140px;
+  right: -140px;
 }
 
 .hero-content {
@@ -99,24 +99,31 @@ export default {
   letter-spacing: 1px;
   text-transform: uppercase;
 
-  background: rgba(96, 165, 250, 0.1);
-  border: 1px solid rgba(96, 165, 250, 0.3);
-  color: #60a5fa;
+  background: rgba(244, 162, 97, 0.15);
+  border: 1px solid rgba(176, 137, 104, 0.35);
+  color: #b08968;
 
   margin-bottom: 1rem;
+  box-shadow: 0 0 12px rgba(244, 162, 97, 0.15);
 }
 
 .subtext {
   margin-top: 1.5rem;
   font-size: 1rem;
-  color: #94a3b8;
+  color: #7b5e57;
   line-height: 1.6;
+}
+
+.hero-content h1,
+.hero-content h2 {
+  color: #6d4c41;
+  text-shadow: 0 0 18px rgba(244, 162, 97, 0.15);
 }
 
 @media (max-width: 768px) {
   .glow {
-    width: 250px;
-    height: 250px;
+    width: 260px;
+    height: 260px;
   }
 
   .subtext {
