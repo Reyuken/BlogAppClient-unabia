@@ -141,7 +141,7 @@ defineExpose({
 }
 
 .modal-box {
-  width: 440px;
+  width: 75vw;
   max-height: 85vh;
   overflow: hidden;
 
