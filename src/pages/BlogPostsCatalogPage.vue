@@ -37,6 +37,21 @@ function clearSearch() {
   searchTitle.value = ''
 }
 
+async function deletePost(blogPostId) {
+  try {
+    await api.delete(`/posts/delete/${blogPostId}`)
+    notyf.success("Post deleted successfully")
+    await loadBlogPosts()
+  } catch (err) {
+    const message =
+      err.response?.data?.message ||
+      err.response?.data?.error?.message ||
+      "Failed to delete post"
+
+    notyf.error(message)
+    console.error(err)
+  }
+}
 const filteredPosts = computed(() => {
   if (!searchTitle.value.trim()) {
     return blogPosts.value
@@ -71,7 +86,9 @@ const filteredPosts = computed(() => {
     <div v-else class="feed">
 
       <div v-for="p in filteredPosts" :key="p._id" class="post">
-
+        <button class="delete-btn" @click="deletePost(p._id)">
+          Delete
+        </button>
         <h2 class="post-title">{{ p.title }}</h2>
 
         <div class="meta">

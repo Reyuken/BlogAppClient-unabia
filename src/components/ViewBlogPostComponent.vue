@@ -84,8 +84,13 @@ async function deleteComment(commentId) {
     await loadComments(post.value._id)
     notyf.success('Comment deleted')
   } catch (err) {
+    const message =
+      err.response?.data?.message ||
+      err.response?.data?.error?.message ||
+      "Failed to delete comment"
+
+    notyf.error(message)
     console.error(err)
-    notyf.error('Failed to delete comment')
   }
 }
 
