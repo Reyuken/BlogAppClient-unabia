@@ -4,6 +4,7 @@ import { Notyf } from 'notyf'
 import api from '../api.js'
 
 import ViewBlogPostComponent from '@/components/ViewBlogPostComponent.vue'
+import AddPostComponent from '@/components/AddPostComponent.vue'
 
 const notyf = new Notyf()
 
@@ -58,7 +59,7 @@ const filteredPosts = computed(() => {
       <input v-model="searchTitle" type="text" placeholder="Search posts..." />
       <button v-if="searchTitle" @click="clearSearch">Clear</button>
     </div>
-
+    <AddPostComponent/>
     <div v-if="loading" class="loading">
       Loading blog posts...
     </div>

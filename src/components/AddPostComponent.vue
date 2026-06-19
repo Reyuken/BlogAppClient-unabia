@@ -72,7 +72,7 @@ defineExpose({
 
 <template>
     <button class="open-btn" @click="openModal">
-        + Add Movie
+        + Add Post
     </button>
 
     <div v-if="isOpen" class="modal-backdrop" @click.self="closeModal">
