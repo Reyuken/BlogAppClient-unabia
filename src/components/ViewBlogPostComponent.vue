@@ -49,11 +49,11 @@ function closeModal() {
 async function loadComments(postId) {
   loadingComments.value = true
   // c.user === store.user.id"
-  console.log(store.user.id)
+  // console.log(store.user.id)
   try {
     const res = await api.get(`/comments/${postId}/`)
     comments.value = res.data.comments
-    console.log(comments);
+    // console.log(comments);
   } catch (err) {
     console.error(err)
     notyf.error('Failed to load comments')
@@ -75,6 +75,17 @@ async function submitComment() {
 
   } catch (err) {
     notyf.error('Failed to add comment')
+  }
+}
+
+async function deleteComment(commentId) {
+  try {
+    await api.delete(`/comments/${post.value._id}/${commentId}`)
+    await loadComments(post.value._id)
+    notyf.success('Comment deleted')
+  } catch (err) {
+    console.error(err)
+    notyf.error('Failed to delete comment')
   }
 }
 
@@ -126,10 +137,14 @@ defineExpose({
               <span class="comment-author">👤 {{ c.user.userName }}</span>
               <div class="comment-content">
                 <p class="comment-text">{{ c.comment }}</p>
+                <div>
+                  <button v-if="c.user._id === store.user.id" class="edit-btn" @click="editCommentRef.startEdit(c)">
+                    Edit
+                  </button>
+                  <button v-if="c.user._id === store.user.id || store.user.isAdmin === true" class="delete-btn" @click="deleteComment(c._id)">Delete</button>
 
-                <button v-if="c.user._id === store.user.id" class="edit-btn" @click="editCommentRef.startEdit(c)">
-                  Edit
-                </button>
+                </div>
+
               </div>
             </div>
           </div>
@@ -271,7 +286,7 @@ defineExpose({
   transition: 0.2s ease;
 }
 
-.comment-content{
+.comment-content {
   display: flex;
   justify-content: space-between;
 }
@@ -332,5 +347,40 @@ defineExpose({
 .edit-btn:active {
   transform: translateY(0);
   box-shadow: none;
+}
+
+.delete-btn {
+    background: rgba(220, 38, 38, 0.12);
+    border: 1px solid rgba(220, 38, 38, 0.25);
+    color: #b91c1c;
+
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    backdrop-filter: blur(6px);
+}
+
+.delete-btn:hover {
+    background: rgba(220, 38, 38, 0.2);
+    border-color: rgba(220, 38, 38, 0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.12);
+}
+
+.delete-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.delete-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }
 </style>
