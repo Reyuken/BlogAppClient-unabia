@@ -2,10 +2,12 @@
 import { ref, onMounted, computed } from 'vue'
 import { Notyf } from 'notyf'
 import api from '../api.js'
+import { useGlobalStore } from '@/stores/global'
 
 import ViewBlogPostComponent from '@/components/ViewBlogPostComponent.vue'
 import AddPostComponent from '@/components/AddPostComponent.vue'
 
+const store = useGlobalStore()
 const notyf = new Notyf()
 
 const blogPosts = ref([])
@@ -86,7 +88,7 @@ const filteredPosts = computed(() => {
     <div v-else class="feed">
 
       <div v-for="p in filteredPosts" :key="p._id" class="post">
-        <button class="delete-btn" @click="deletePost(p._id)">
+        <button  v-if="p.author._id === store.user.id || store.user.isAdmin === true" class="delete-btn" @click="deletePost(p._id)">
           Delete
         </button>
         <h2 class="post-title">{{ p.title }}</h2>
@@ -252,5 +254,27 @@ const filteredPosts = computed(() => {
 .empty {
   text-align: center;
   color: #7b5e57;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(220, 38, 38, 0.25);
+    background: rgba(220, 38, 38, 0.12);
+    color: #b91c1c;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    backdrop-filter: blur(6px);
+}
+
+.delete-btn:hover {
+    background: rgba(220, 38, 38, 0.22);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.15);
 }
 </style>
