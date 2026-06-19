@@ -141,7 +141,8 @@ defineExpose({
                   <button v-if="c.user._id === store.user.id" class="edit-btn" @click="editCommentRef.startEdit(c)">
                     Edit
                   </button>
-                  <button v-if="c.user._id === store.user.id || store.user.isAdmin === true" class="delete-btn" @click="deleteComment(c._id)">Delete</button>
+                  <button v-if="c.user._id === store.user.id || store.user.isAdmin === true" class="delete-btn"
+                    @click="deleteComment(c._id)">Delete</button>
 
                 </div>
 
@@ -213,6 +214,7 @@ defineExpose({
 .desc {
   margin-top: 1rem;
   color: #6d4c41;
+  white-space: pre-wrap;
   line-height: 1.5;
 }
 
@@ -350,37 +352,37 @@ defineExpose({
 }
 
 .delete-btn {
-    background: rgba(220, 38, 38, 0.12);
-    border: 1px solid rgba(220, 38, 38, 0.25);
-    color: #b91c1c;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #b91c1c;
 
-    padding: 0.5rem 1rem;
-    border-radius: 999px;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
 
-    font-size: 0.85rem;
-    font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 600;
 
-    cursor: pointer;
-    transition: 0.2s ease;
+  cursor: pointer;
+  transition: 0.2s ease;
 
-    backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
 .delete-btn:hover {
-    background: rgba(220, 38, 38, 0.2);
-    border-color: rgba(220, 38, 38, 0.45);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.12);
+  background: rgba(220, 38, 38, 0.2);
+  border-color: rgba(220, 38, 38, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.12);
 }
 
 .delete-btn:active {
-    transform: translateY(0);
-    box-shadow: none;
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .delete-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 </style>

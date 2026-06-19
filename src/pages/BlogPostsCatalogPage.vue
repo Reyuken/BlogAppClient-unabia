@@ -59,7 +59,7 @@ const filteredPosts = computed(() => {
       <input v-model="searchTitle" type="text" placeholder="Search posts..." />
       <button v-if="searchTitle" @click="clearSearch">Clear</button>
     </div>
-    <AddPostComponent @refresh="loadBlogPosts"/>
+    <AddPostComponent @refresh="loadBlogPosts" />
     <div v-if="loading" class="loading">
       Loading blog posts...
     </div>
@@ -211,6 +211,7 @@ const filteredPosts = computed(() => {
 .preview {
   margin-top: 0.8rem;
   color: #6d4c41;
+  white-space: pre-wrap;
   line-height: 1.6;
 }
 
