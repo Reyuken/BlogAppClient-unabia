@@ -59,7 +59,7 @@ const filteredPosts = computed(() => {
       <input v-model="searchTitle" type="text" placeholder="Search posts..." />
       <button v-if="searchTitle" @click="clearSearch">Clear</button>
     </div>
-    <AddPostComponent/>
+    <AddPostComponent @refresh="loadBlogPosts"/>
     <div v-if="loading" class="loading">
       Loading blog posts...
     </div>

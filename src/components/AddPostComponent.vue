@@ -14,14 +14,11 @@ const notyf = new Notyf()
 const isOpen = ref(false)
 
 const title = ref('')
-const director = ref('')
-const year = ref('')
-const genre = ref('')
-const description = ref('')
+const content = ref('')
 
 function openModal() {
     if (!store.user.token) {
-        notyf.error("Please login to add movies")
+        notyf.error("Please login to create a post")
         router.push({ name: 'Login' })
         return
     }
@@ -33,34 +30,28 @@ function closeModal() {
     isOpen.value = false
 
     title.value = ''
-    director.value = ''
-    year.value = ''
-    genre.value = ''
-    description.value = ''
+    content.value = ''
 }
 
-async function submitMovie() {
+async function submitPost() {
 
-    if (!title.value || !director.value || !year.value || !genre.value) {
-        return notyf.error("Please fill all required fields")
+    if (!title.value.trim() || !content.value.trim()) {
+        return notyf.error("Please fill in all fields")
     }
 
     try {
-        await api.post('/movies/addMovie', {
+        await api.post('/posts', {
             title: title.value,
-            director: director.value,
-            year: year.value,
-            genre: genre.value,
-            description: description.value
+            content: content.value
         })
 
-        notyf.success("Movie added 🎬")
+        notyf.success("Post published successfully")
 
         closeModal()
         emit('refresh')
 
     } catch (err) {
-        notyf.error("Failed to add movie")
+        notyf.error("Failed to publish post")
         console.error(err)
     }
 }
@@ -72,26 +63,23 @@ defineExpose({
 
 <template>
     <button class="open-btn" @click="openModal">
-        + Add Post
+        + New Post
     </button>
 
     <div v-if="isOpen" class="modal-backdrop" @click.self="closeModal">
 
         <div class="modal-box">
 
-            <h3>Add Movie</h3>
+            <h3>Create Blog Post</h3>
 
-            <input v-model="title" placeholder="Title" />
-            <input v-model="director" placeholder="Director" />
-            <input v-model.number="year" type="number" placeholder="Year (e.g. 2024)" />
-            <input v-model="genre" placeholder="Genre" />
+            <input v-model="title" placeholder="Post Title" />
 
-            <textarea v-model="description" placeholder="Description"></textarea>
+            <textarea v-model="content" placeholder="Write your blog post here..."></textarea>
 
             <div class="actions">
 
-                <button class="submit" @click="submitMovie">
-                    Save
+                <button class="submit" @click="submitPost">
+                    Publish
                 </button>
 
                 <button class="cancel" @click="closeModal">
@@ -107,20 +95,30 @@ defineExpose({
 
 <style scoped>
 .open-btn {
-    background: #60a5fa;
-    border: none;
+    background: rgba(244, 162, 97, 0.2);
+    border: 1px solid rgba(176, 137, 104, 0.25);
     padding: 0.7rem 1rem;
     border-radius: 999px;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
     margin-bottom: 1rem;
-    color: #0b0b0f;
+    color: #6d4c41;
+    transition: 0.2s ease;
+    backdrop-filter: blur(6px);
+}
+
+.open-btn:hover {
+    background: rgba(244, 162, 97, 0.35);
+    border-color: rgba(244, 162, 97, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(244, 162, 97, 0.15);
 }
 
 .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(109, 76, 65, 0.45);
+    backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -128,11 +126,15 @@ defineExpose({
 }
 
 .modal-box {
-    background: #111827;
+    background: rgba(255, 250, 245, 0.96);
     padding: 2rem;
-    border-radius: 14px;
-    width: 360px;
-    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: 20px;
+    width: 75vw;
+
+    border: 1px solid rgba(176, 137, 104, 0.25);
+    color: #6d4c41;
+    box-shadow: 0 15px 35px rgba(109, 76, 65, 0.12);
+    align-items: center;
 }
 
 input,
@@ -140,39 +142,62 @@ textarea {
     width: 100%;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    padding: 0.6rem;
-    border-radius: 8px;
-    border: none;
-    background: #1f2937;
-    color: white;
+    padding: 0.7rem;
+    border-radius: 12px;
+    border: 1px solid rgba(176, 137, 104, 0.25);
+    background: rgba(255, 255, 255, 0.7);
+    color: #6d4c41;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+    border-color: rgba(244, 162, 97, 0.6);
+    box-shadow: 0 0 10px rgba(244, 162, 97, 0.15);
 }
 
 textarea {
-    min-height: 90px;
+    min-height: 25vh;
     resize: none;
 }
 
 .actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    align-self: flex-end;
     margin-top: 1rem;
 }
 
 .submit {
-    background: #22c55e;
-    border: none;
-    padding: 0.5rem 1rem;
+    background: rgba(244, 162, 97, 0.25);
+    border: 1px solid rgba(176, 137, 104, 0.25);
+    padding: 0.55rem 1rem;
     border-radius: 999px;
     cursor: pointer;
-    color: white;
+    color: #6d4c41;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.submit:hover {
+    background: rgba(244, 162, 97, 0.4);
+    transform: translateY(-2px);
 }
 
 .cancel {
-    background: #ef4444;
-    border: none;
-    padding: 0.5rem 1rem;
+    background: rgba(220, 38, 38, 0.12);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    padding: 0.55rem 1rem;
     border-radius: 999px;
     cursor: pointer;
-    color: white;
+    color: #b91c1c;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.cancel:hover {
+    background: rgba(220, 38, 38, 0.2);
+    transform: translateY(-2px);
 }
 </style>
