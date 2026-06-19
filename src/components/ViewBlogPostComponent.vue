@@ -52,8 +52,9 @@ async function loadComments(postId) {
   // console.log(store.user.id)
   try {
     const res = await api.get(`/comments/${postId}/`)
-    comments.value = res.data.comments
-    // console.log(comments);
+    // comments.value = res.data.comments
+    comments.value = res.data.comments.reverse()
+    console.log(comments);
   } catch (err) {
     console.error(err)
     notyf.error('Failed to load comments')
@@ -141,8 +142,14 @@ defineExpose({
             <div v-for="c in comments" :key="c._id" class="comment">
               <span class="comment-author">👤 {{ c.user.userName }}</span>
               <div class="comment-content">
-                <p class="comment-text">{{ c.comment }}</p>
                 <div>
+                  <p class="comment-text">{{ c.comment }}</p>
+                  <p v-if="c.updatedAt !== c.createdAt" class="modified-indicator"> Modified: {{ new
+                    Date(c.updatedAt).toLocaleDateString() || '' }}</p>
+                  <p v-if="c.updatedAt === c.createdAt" class="modified-indicator"> Created: {{ new
+                    Date(c.createdAt).toLocaleDateString() || '' }}</p>
+                </div>
+                <div class="btn-container">
                   <button v-if="c.user._id === store.user.id" class="edit-btn" @click="editCommentRef.startEdit(c)">
                     Edit
                   </button>
@@ -309,6 +316,11 @@ defineExpose({
   color: #7b5e57;
 }
 
+.btn-container {
+  display: flex;
+  align-items: end;
+}
+
 .close-btn {
   margin-top: 1rem;
   width: 100%;
@@ -389,5 +401,18 @@ defineExpose({
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
+}
+
+.modified-indicator {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  color: rgba(100, 116, 139, 0.6);
+  font-style: italic;
+  opacity: 0.75;
+}
+
+.modified-indicator p {
+  margin: 0;
+  color: rgba(148, 163, 184, 0.6);
 }
 </style>
