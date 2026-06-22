@@ -19,6 +19,13 @@ const viewModal = ref(null)
 const searchTitle = ref('')
 const editModal = ref(null)
 
+const showMyPosts = ref(false)
+
+function toggleMyPosts() {
+  showMyPosts.value = !showMyPosts.value
+  searchTitle.value = '' // clear search when toggling
+}
+
 function editPost(post) {
   editModal.value?.startEdit(post)
 }
@@ -61,13 +68,19 @@ async function deletePost(blogPostId) {
   }
 }
 const filteredPosts = computed(() => {
-  if (!searchTitle.value.trim()) {
-    return blogPosts.value
+  let posts = blogPosts.value
+
+  if (showMyPosts.value) {
+    posts = posts.filter(p => p.author._id === store.user.id)
   }
 
-  return blogPosts.value.filter(p =>
-    p.title.toLowerCase().includes(searchTitle.value.toLowerCase())
-  )
+  if (searchTitle.value.trim()) {
+    posts = posts.filter(p =>
+      p.title.toLowerCase().includes(searchTitle.value.toLowerCase())
+    )
+  }
+
+  return posts
 })
 </script>
 
@@ -81,6 +94,9 @@ const filteredPosts = computed(() => {
     <div class="search-bar">
       <input v-model="searchTitle" type="text" placeholder="Search posts..." />
       <button v-if="searchTitle" @click="clearSearch">Clear</button>
+      <button class="my-posts-btn" :class="{ active: showMyPosts }" @click="toggleMyPosts">
+        {{ showMyPosts ? 'All Posts' : 'My Posts' }}
+      </button>
     </div>
     <AddPostComponent @refresh="loadBlogPosts" />
     <div v-if="loading" class="loading">
