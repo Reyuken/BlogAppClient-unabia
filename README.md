@@ -1,8 +1,8 @@
-# 🍦 Vanilla Scoop Blog
+# 🍦 Vanilla Blog
 
 A full-stack blog management application built for the Zuitt S83 Mock Technical Exam.
 
-Vanilla Scoop Blog allows users to create, manage, and discuss blog posts through a clean and responsive blogging platform with authentication, role-based access control, and comment management features.
+Vanilla Blog allows users to create, manage, and discuss blog posts through a clean and responsive blogging platform with authentication, role-based access control, and comment management features.
 
 ---
 
