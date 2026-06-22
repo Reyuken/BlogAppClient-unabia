@@ -1,112 +1,200 @@
-# 🎬 MovieVault - MTE
+# 🍦 Vanilla Scoop Blog
 
-A full-stack movie catalog application built for the Zuitt full-stack web development mock technical exam.  
-MovieVault allows users and admins to manage movies with authentication, CRUD operations, comments, and a modern UI.
+A full-stack blog management application built for the Zuitt S83 Mock Technical Exam.
+
+Vanilla Scoop Blog allows users to create, manage, and discuss blog posts through a clean and responsive blogging platform with authentication, role-based access control, and comment management features.
 
 ---
 
+## 👤 Developer
+
+- Ray Unabia
+
+---
+
+## User Credentials
+
+### Admin User
+- **Email:** admin@mail.com
+- **Password:** admin123
+
+### Test User
+- **Email:** user@mail.com
+- **Password:** user12345
+
+---
 ## ⚙️ Features
 
 ---
 
 ## 🧩 Core UI Components
-- Navigation Bar (Role-based navigation: User / Admin)
-- Banner Component
-- Movies Catalog Page (User view)
-- Admin Movies Catalog Page (Table view)
-- View Movie Modal Component
-- Add Movie Modal Component
-- Update Movie Modal Component
-- 404 Error Page
+
+- Navigation Bar (Role-based navigation)
 - Home Page
+- Banner Component
+- Blog Feed Page
+- Admin Blog Management Page
+- View Blog Post Modal
+- Add Blog Post Modal
+- Update Blog Post Modal
+- Login Page
+- Register Page
+- 404 Error Page
 
 ---
 
 ## 👤 Authentication System
+
 - User Registration
 - User Login
 - JWT Authentication
 - Protected Routes
-- Persistent login via `localStorage`
-- User state management using Pinia (`global store`)
-- Role-based access control (`isAdmin` / user)
+- Persistent Login via localStorage
+- User State Management using Pinia
+- Role-Based Access Control (Admin / User)
 
 ---
 
-## 🎬 Movie Management System
-
-### Admin Features
-- Create new movie
-- View all movies (table format)
-- Update movie details
-- Delete movie
-- View full movie details in modal
-
----
+## 👥 User Management
 
 ### User Features
-- View movie catalog
-- View movie details (modal)
-- Add comments to movies
-- View comments per movie
-- Read-only access to movie data
+
+- Register New Account
+- Login to Existing Account
+- View User Profile Details
+- Update Username
+- Update Password
+
+### Admin Features
+
+- Assign Admin Role to Users
+- Access Admin Management Features
 
 ---
 
-## 💬 Comment System
-- Add comment to a movie
-- Fetch comments per movie
-- Display comments per movie
-- Real-time refresh after posting comment
+## 📝 Blog Post Management
+
+### User Features
+
+- View All Blog Posts
+- View Individual Blog Posts
+- Create Blog Posts
+- Update Own Blog Posts
+- Delete Own Blog Posts
+- Comment on Blog Posts
+
+### Admin Features
+
+- View All Blog Posts
+- Delete Any Blog Post
+- Moderate User Content
+
+---
+
+## 💬 Comment Management
+
+### User Features
+
+- Add Comment to a Blog Post
+- View Comments on Blog Posts
+- Update Own Comments
+- Delete Own Comments
+- View Comment Edit History Counter
+
+### Admin Features
+
+- Delete Any Comment
 
 ---
 
 ## 🌐 API Endpoints Used
 
 ### Users
-- POST /users/register  
-- POST /users/login  
-- GET /users/details (Requires token)
+
+- POST /users/register
+- POST /users/login
+- GET /users/details
+- PATCH /users/updateUsername
+- PATCH /users/updatePassword
+- PATCH /users/setAdmin/:userId
 
 ---
 
-### Movies
-- POST /movies/addMovie  
-- GET /movies/getMovies  
-- PATCH /movies/updateMovie/:id  
-- DELETE /movies/deleteMovie/:id  
+### Blog Posts
+
+- POST /posts/add
+- GET /posts
+- GET /posts/:blogPostId
+- PATCH /posts/update/:blogPostId
+- DELETE /posts/delete/:blogPostId
 
 ---
 
 ### Comments
-- POST /movies/addComment/:id  
-- GET /movies/getComments/:id  
+
+- POST /comments/:postId
+- GET /comments/:postId
+- PATCH /comments/:commentId
+- DELETE /comments/:commentId
 
 ---
 
-## 🔐 User Profile System
-- Fetch logged-in user details
-- Display email in navbar
-- Role support (`isAdmin`) for admin dashboard access
-- Conditional rendering (Admin vs User UI)
+## 🔐 Authorization Rules
+
+- Protected routes require a valid JWT Bearer Token
+- Only authenticated users can create blog posts
+- Only the author can edit their own blog posts
+- Only the author or an admin can delete a blog post
+- Only the owner can edit their own comments
+- Only the owner or an admin can delete comments
+- Only admins can assign admin privileges
 
 ---
 
 ## 🎨 UI / UX Design
-- Dark cinematic UI theme
-- Blue accent branding (#60a5fa style system)
-- Responsive grid layout
-- Modal-based interactions (View / Add / Edit)
-- Smooth hover animations
-- Clean card-based UI for movies
-- Admin table layout for management
-- Modern glassmorphism-inspired styling
+
+- Vanilla Ice Cream Inspired Theme
+- Warm Cream and Caramel Color Palette
+- Responsive Layout
+- Modal-Based Blog Viewing
+- Smooth Hover Animations
+- Modern Soft-Glass Design Elements
+- Mobile-Friendly Interface
+- Role-Aware Navigation
 
 ---
 
-## 📌 Notes
-- Capstone 3 demonstration project
-- Built for educational purposes
-- Focused on CRUD, authentication, role-based UI, and UI/UX design
-- Backend deployed on Render
-- Frontend consumes REST API via Axios
+## 🛠️ Technology Stack
+
+### Frontend
+
+- Vue 3
+- Vue Router
+- Pinia
+- Axios
+- Bootstrap 5
+- Notyf
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- bcrypt
+
+---
+
+## 📌 Project Notes
+
+- Built for the Zuitt S83 Mock Technical Exam
+- Implements RESTful API Design Principles
+- Uses MongoDB and Mongoose for Data Persistence
+- Passwords Secured Using bcrypt
+- JWT-Based Authentication System
+- Modular MVC Architecture
+- Role-Based Access Control
+- Comment Editing History Tracking
+- Backend Deployed on Render
+- Frontend Consumes REST API via Axios
